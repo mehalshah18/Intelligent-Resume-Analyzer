@@ -1,13 +1,21 @@
 
 import re
+import nltk
+
 from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
 
 
-# Load English stopwords
+# Download stopwords if they are not available
+try:
+    nltk.data.find("corpora/stopwords")
+except LookupError:
+    nltk.download("stopwords", quiet=True)
+
 STOP_WORDS = set(stopwords.words("english"))
 
-# Tokenizer that preserves technical terms
+
+# Tokenizer that preserves technical terms such as C++, C#, etc.
 tokenizer = RegexpTokenizer(
     r"[a-z0-9]+(?:[+#.][a-z0-9+#.]*)*"
 )
