@@ -73,8 +73,51 @@ p, label {
 .stTextArea textarea,
 .stNumberInput input {
     border-radius: 10px;
-    border: 1px solid #D5E2DA;
-    background-color: white;
+    border: 1px solid #D5E2DA !important;
+    background-color: #FFFFFF !important;
+    color: #24594D !important;
+    -webkit-text-fill-color: #24594D !important;
+    font-size: 15px;
+}
+
+/* Input placeholders */
+.stTextInput input::placeholder,
+.stTextArea textarea::placeholder,
+.stNumberInput input::placeholder {
+    color: #82968B !important;
+    -webkit-text-fill-color: #82968B !important;
+    opacity: 1 !important;
+}
+
+/* Extracted resume text and text areas */
+[data-testid="stTextArea"] textarea {
+    background-color: #FFFFFF !important;
+    color: #24594D !important;
+    -webkit-text-fill-color: #24594D !important;
+}
+
+/* General displayed text */
+.stMarkdown,
+.stMarkdown p,
+.stMarkdown li,
+.stText,
+.stCaption {
+    color: #40534D;
+}
+
+/* Input labels */
+.stTextInput label,
+.stTextArea label,
+.stNumberInput label,
+.stSelectbox label {
+    color: #24594D !important;
+    font-weight: 600;
+}
+
+/* Select box text */
+.stSelectbox div[data-baseweb="select"] {
+    background-color: #FFFFFF;
+    color: #24594D;
 }
 
 /* Select boxes */
@@ -222,7 +265,7 @@ with st.sidebar:
 # 4. APPLICATION HEADER
 # =====================================================
 
-st.markdown("""
+st.html("""
 <div style="
     background: linear-gradient(120deg, #E4F0E9, #F8EBDD);
     padding: 30px;
@@ -234,20 +277,15 @@ st.markdown("""
     </div>
 
     <h1 style="font-size:38px; color:#24594D; margin-bottom:8px;">
-    Welcome to ResumeIQ
+        Welcome to ResumeIQ
     </h1>
-
-    <p style="font-size:16px; color:#536B60; margin-bottom:0;">
-    Analyze your resume, discover skill gaps, and find opportunities
-    that match your career goals.
-    </p>
 
     <p style="font-size:16px; color:#536B60; margin-bottom:0;">
         Analyze your resume, discover skill gaps, and find opportunities
         that match your career goals.
     </p>
 </div>
-""", unsafe_allow_html=True)
+""")
 
 st.write(
     "Your intelligent companion for resume evaluation and career preparation."
@@ -348,23 +386,23 @@ if uploaded_resume is not None:
 
                 st.divider()
 
+                # =========================================
+                # EDUCATION DETAILS - VERTICAL ALIGNMENT
+                # =========================================
+
                 st.markdown("### Education Details")
 
-                col1, col2 = st.columns(2)
+                st.markdown(
+                    f"**Degree:** {resume_education['degree'] or 'Not found'}"
+                )
 
-                with col1:
-                    st.write(
-                        "**Degree:**",
-                        resume_education["degree"] or "Not found"
-                    )
-
-                with col2:
-                    st.write(
-                        "**Field:**",
-                        resume_education["field"] or "Not found"
-                    )
+                st.markdown(
+                    f"**Field:** {resume_education['field'] or 'Not found'}"
+                )
 
                 st.divider()
+
+                # Experience Details
 
                 st.markdown("### Experience Details")
 
@@ -374,6 +412,8 @@ if uploaded_resume is not None:
                 )
 
                 st.divider()
+
+                # Extracted Technical Skills
 
                 st.markdown("### Extracted Technical Skills")
 
@@ -393,6 +433,8 @@ if uploaded_resume is not None:
                     st.warning("No technical skills identified.")
 
                 st.divider()
+
+                # Preprocessed Resume Text
 
                 st.markdown("### Preprocessed Resume Text")
 
