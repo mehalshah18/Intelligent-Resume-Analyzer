@@ -1,0 +1,218 @@
+
+[
+  {
+    "name": "Python",
+    "category": "Programming Languages",
+    "aliases": ["python", "python 3"]
+  },
+  {
+    "name": "Java",
+    "category": "Programming Languages",
+    "aliases": ["java", "core java"]
+  },
+  {
+    "name": "C++",
+    "category": "Programming Languages",
+    "aliases": ["c++", "cpp"]
+  },
+  {
+    "name": "C",
+    "category": "Programming Languages",
+    "aliases": ["c programming", "c language"]
+  },
+  {
+    "name": "C#",
+    "category": "Programming Languages",
+    "aliases": ["c#", "c sharp"]
+  },
+  {
+    "name": "JavaScript",
+    "category": "Programming Languages",
+    "aliases": ["javascript", "js"]
+  },
+  {
+    "name": "TypeScript",
+    "category": "Programming Languages",
+    "aliases": ["typescript"]
+  },
+  {
+    "name": "SQL",
+    "category": "Database",
+    "aliases": ["sql", "structured query language"]
+  },
+  {
+    "name": "HTML",
+    "category": "Web Development",
+    "aliases": ["html", "html5"]
+  },
+  {
+    "name": "CSS",
+    "category": "Web Development",
+    "aliases": ["css", "css3"]
+  },
+  {
+    "name": "React",
+    "category": "Web Development",
+    "aliases": ["react", "react.js", "reactjs"]
+  },
+  {
+    "name": "Node.js",
+    "category": "Web Development",
+    "aliases": ["node.js", "nodejs"]
+  },
+  {
+    "name": "Angular",
+    "category": "Web Development",
+    "aliases": ["angular", "angularjs"]
+  },
+  {
+    "name": "Django",
+    "category": "Web Development",
+    "aliases": ["django"]
+  },
+  {
+    "name": "Flask",
+    "category": "Web Development",
+    "aliases": ["flask"]
+  },
+  {
+    "name": "Machine Learning",
+    "category": "Artificial Intelligence",
+    "aliases": ["machine learning", "ml"]
+  },
+  {
+    "name": "Deep Learning",
+    "category": "Artificial Intelligence",
+    "aliases": ["deep learning", "dl"]
+  },
+  {
+    "name": "Artificial Intelligence",
+    "category": "Artificial Intelligence",
+    "aliases": ["artificial intelligence", "ai"]
+  },
+  {
+    "name": "TensorFlow",
+    "category": "Artificial Intelligence",
+    "aliases": ["tensorflow"]
+  },
+  {
+    "name": "PyTorch",
+    "category": "Artificial Intelligence",
+    "aliases": ["pytorch"]
+  },
+  {
+    "name": "Scikit-learn",
+    "category": "Artificial Intelligence",
+    "aliases": ["scikit-learn", "sklearn"]
+  },
+  {
+    "name": "Data Science",
+    "category": "Data Science",
+    "aliases": ["data science"]
+  },
+  {
+    "name": "Data Analysis",
+    "category": "Data Science",
+    "aliases": ["data analysis", "data analytics"]
+  },
+  {
+    "name": "Pandas",
+    "category": "Data Science",
+    "aliases": ["pandas"]
+  },
+  {
+    "name": "NumPy",
+    "category": "Data Science",
+    "aliases": ["numpy"]
+  },
+  {
+    "name": "Cybersecurity",
+    "category": "Cybersecurity",
+    "aliases": ["cybersecurity", "cyber security"]
+  },
+  {
+    "name": "Network Security",
+    "category": "Cybersecurity",
+    "aliases": ["network security"]
+  },
+  {
+    "name": "Ethical Hacking",
+    "category": "Cybersecurity",
+    "aliases": ["ethical hacking", "penetration testing", "pentesting"]
+  },
+  {
+    "name": "Cryptography",
+    "category": "Cybersecurity",
+    "aliases": ["cryptography"]
+  },
+  {
+    "name": "Linux",
+    "category": "Operating Systems",
+    "aliases": ["linux", "ubuntu"]
+  },
+  {
+    "name": "Git",
+    "category": "Tools",
+    "aliases": ["git"]
+  },
+  {
+    "name": "GitHub",
+    "category": "Tools",
+    "aliases": ["github"]
+  },
+  {
+    "name": "Docker",
+    "category": "Tools",
+    "aliases": ["docker"]
+  },
+  {
+    "name": "Kubernetes",
+    "category": "Tools",
+    "aliases": ["kubernetes", "k8s"]
+  },
+  {
+    "name": "AWS",
+    "category": "Cloud Computing",
+    "aliases": ["aws", "amazon web services"]
+  },
+  {
+    "name": "Microsoft Azure",
+    "category": "Cloud Computing",
+    "aliases": ["azure", "microsoft azure"]
+  },
+  {
+    "name": "Google Cloud",
+    "category": "Cloud Computing",
+    "aliases": ["google cloud", "gcp"]
+  },
+  {
+    "name": "MongoDB",
+    "category": "Database",
+    "aliases": ["mongodb", "mongo db"]
+  },
+  {
+    "name": "MySQL",
+    "category": "Database",
+    "aliases": ["mysql"]
+  },
+  {
+    "name": "PostgreSQL",
+    "category": "Database",
+    "aliases": ["postgresql", "postgres"]
+  },
+  {
+    "name": "REST API",
+    "category": "Backend Development",
+    "aliases": ["rest api", "restful api"]
+  },
+  {
+    "name": "Data Structures and Algorithms",
+    "category": "Computer Science Fundamentals",
+    "aliases": ["data structures and algorithms", "dsa"]
+  },
+  {
+    "name": "Object-Oriented Programming",
+    "category": "Computer Science Fundamentals",
+    "aliases": ["object oriented programming", "oop"]
+  }
+]
