@@ -11,57 +11,255 @@ from modules.project_extractor import extract_projects
 from modules.report_generator import generate_pdf_report
 
 
-
-
 # =====================================================
 # 1. PAGE CONFIGURATION
 # =====================================================
 
 st.set_page_config(
-    page_title="Intelligent Resume Analyzer",
+    page_title="ResumeIQ | Intelligent Resume Analyzer",
     page_icon="📄",
     layout="wide"
 )
 
 
 # =====================================================
-# 2. APPLICATION TITLE
+# 2. CUSTOM WEBSITE DESIGN
 # =====================================================
 
-st.title("📄 Intelligent Resume Analyzer")
+st.markdown("""
+<style>
 
-st.write(
-    "Analyze your resume against a job description "
-    "and identify areas for improvement."
-)
+/* Main background */
+.stApp {
+    background-color: #F7F8F4;
+}
 
-st.divider()
+/* Main content */
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    max-width: 1200px;
+}
 
-st.subheader("Welcome!")
+/* Headings */
+h1, h2, h3 {
+    color: #24594D !important;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-st.write(
-    """
-    This application helps candidates evaluate how well
-    their resumes match a particular job description.
+/* General text */
+p, label {
+    color: #40534D;
+}
 
-    **Features:**
-    - Resume PDF upload
-    - Job description analysis
-    - Technical skill extraction
-    - Resume match scoring
-    - Identification of missing skills
-    - Individual evaluation scores
-    """
-)
+/* Buttons */
+.stButton > button {
+    background-color: #397B69;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 0.65rem 1.5rem;
+    font-weight: 600;
+    transition: 0.2s;
+}
 
-st.divider()
+.stButton > button:hover {
+    background-color: #24594D;
+    color: white;
+}
+
+/* Input fields */
+.stTextInput input,
+.stTextArea textarea,
+.stNumberInput input {
+    border-radius: 10px;
+    border: 1px solid #D5E2DA;
+    background-color: white;
+}
+
+/* Select boxes */
+.stSelectbox > div > div {
+    border-radius: 10px;
+}
+
+/* File uploader */
+[data-testid="stFileUploader"] {
+    background-color: #EAF2ED;
+    border: 2px dashed #8BAF9F;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+/* Metric cards */
+[data-testid="stMetric"] {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #E1EAE4;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+}
+
+/* Progress bar */
+.stProgress > div > div > div {
+    background-color: #397B69;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background-color: #E8F0EA;
+}
+
+/* Dividers */
+hr {
+    border-color: #DCE7DF;
+}
+
+/* Section heading cards */
+.section-heading {
+    background: linear-gradient(120deg, #E8F1EB, #F8EBDD);
+    padding: 22px 25px;
+    border-radius: 16px;
+    margin: 25px 0 18px 0;
+    border-left: 5px solid #397B69;
+}
+
+.section-heading span {
+    color: #397B69;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.section-heading h2 {
+    color: #24594D;
+    font-size: 24px;
+    margin: 8px 0;
+}
+
+.section-heading p {
+    color: #60766A;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+/* Result cards */
+.result-card {
+    background-color: white;
+    border: 1px solid #E1EAE4;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.result-card h3 {
+    margin-top: 0;
+}
+
+/* Skill tags */
+.skill-tag {
+    display: inline-block;
+    background-color: #E4F0E9;
+    color: #24594D;
+    padding: 7px 12px;
+    border-radius: 20px;
+    margin: 4px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.missing-tag {
+    display: inline-block;
+    background-color: #F8EBDD;
+    color: #A45E32;
+    padding: 7px 12px;
+    border-radius: 20px;
+    margin: 4px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 
 # =====================================================
-# 3. INITIALIZE RESUME VARIABLES
+# 3. SIDEBAR
+# =====================================================
+
+with st.sidebar:
+
+    st.markdown("""
+    <div style="text-align:center; padding:15px 5px;">
+        <div style="font-size:38px;">📄</div>
+        <h2 style="color:#24594D; margin:0;">ResumeIQ</h2>
+        <p style="font-size:12px; color:#658276;">
+            Intelligent Resume Analyzer
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.divider()
+
+    st.markdown("### ✨ Your Workspace")
+    st.markdown("📤 Resume Upload")
+    st.markdown("🎯 Job Matching")
+    st.markdown("📊 Analysis Results")
+    st.markdown("📥 Download Report")
+
+    st.divider()
+
+    st.markdown("### 💡 Quick Tip")
+    st.info(
+        "Use a clear, updated PDF resume for more accurate analysis."
+    )
+
+    st.divider()
+
+    st.caption("ResumeIQ | AI Career Assistant")
+
+
+# =====================================================
+# 4. APPLICATION HEADER
+# =====================================================
+
+st.markdown("""
+<div style="
+    background: linear-gradient(120deg, #E4F0E9, #F8EBDD);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+">
+    <div style="font-size:14px; color:#397B69; font-weight:600;">
+        ✦ YOUR AI-POWERED CAREER ASSISTANT
+    </div>
+
+    <h1 style="font-size:38px; color:#24594D; margin-bottom:8px;">
+    Welcome to ResumeIQ
+    </h1>
+
+    <p style="font-size:16px; color:#536B60; margin-bottom:0;">
+    Analyze your resume, discover skill gaps, and find opportunities
+    that match your career goals.
+    </p>
+
+    <p style="font-size:16px; color:#536B60; margin-bottom:0;">
+        Analyze your resume, discover skill gaps, and find opportunities
+        that match your career goals.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+st.write(
+    "Your intelligent companion for resume evaluation and career preparation."
+)
+
+
+# =====================================================
+# 5. INITIALIZE RESUME VARIABLES
 # =====================================================
 
 resume_text = ""
+
 extracted_skills = []
 
 resume_education = {
@@ -77,15 +275,22 @@ projects = []
 
 
 # =====================================================
-# 4. RESUME UPLOAD AND PROCESSING
+# 6. RESUME UPLOAD AND PROCESSING
 # =====================================================
 
-st.header("1. Upload Your Resume")
+st.markdown("""
+<div class="section-heading">
+    <span>01 · RESUME UPLOAD</span>
+    <h2>Let's start with your resume</h2>
+    <p>Upload your latest resume in PDF format to begin your analysis.</p>
+</div>
+""", unsafe_allow_html=True)
 
 uploaded_resume = st.file_uploader(
     "Choose your resume (PDF format)",
     type=["pdf"]
 )
+
 
 if uploaded_resume is not None:
 
@@ -95,76 +300,106 @@ if uploaded_resume is not None:
 
         # Extract text from PDF
         resume_text = extract_text_from_pdf(uploaded_resume)
-        # Extract projects
-        projects = extract_projects(resume_text)
-
-        st.subheader("Extracted Projects")
-
-        if projects:
-            for project in projects:
-                st.write("Project:", project["name"])
-                st.write(
-                    "Technical Skills:",
-                    ", ".join(project["skills"]) or "No skills identified"
-        )
-        else:
-            st.info("No projects found in the resume.")
-
-        # Extract education information
-        resume_education = extract_education(resume_text)
-
-        # Extract work experience
-        resume_experience = extract_experience(resume_text)
-
-        st.subheader("Extracted Experience Details")
-        st.write("Total Experience:", resume_experience["years"], "years")
-
-
-        st.subheader("Extracted Education Details")
-
-        st.write("Degree:", resume_education["degree"] or "Not found")
-
-        st.write("Education Field:", resume_education["field"] or "Not found")  
 
         if not resume_text or not resume_text.strip():
+
             st.error("No readable text found in the uploaded PDF.")
 
         else:
 
             st.success("PDF text extraction completed!")
 
+            # Extract projects
+            projects = extract_projects(resume_text)
+
+            # Extract education
+            resume_education = extract_education(resume_text)
+
+            # Extract experience
+            resume_experience = extract_experience(resume_text)
+
             # Preprocess resume text
             processed_data = preprocess_text(resume_text)
-
-            st.subheader("Preprocessed Resume Text")
-
-            st.text_area(
-                "Cleaned Resume Content",
-                processed_data["cleaned_text"],
-                height=200
-            )
 
             # Extract technical skills
             extracted_skills = extract_skills(resume_text) or []
 
-            st.subheader("Extracted Technical Skills")
+            with st.expander("📄 View Extracted Resume Information"):
 
-            if extracted_skills:
+                st.markdown("### Extracted Projects")
 
-                st.success(
-                    f"{len(extracted_skills)} technical skills identified!"
-                )
+                if projects:
 
-                for skill in extracted_skills:
+                    for project in projects:
 
+                        st.markdown(
+                            f"**{project['name']}**"
+                        )
+
+                        st.write(
+                            "Technical Skills:",
+                            ", ".join(project["skills"])
+                            or "No skills identified"
+                        )
+
+                else:
+
+                    st.info("No projects found in the resume.")
+
+                st.divider()
+
+                st.markdown("### Education Details")
+
+                col1, col2 = st.columns(2)
+
+                with col1:
                     st.write(
-                        f"• {skill['name']} ({skill['category']})"
+                        "**Degree:**",
+                        resume_education["degree"] or "Not found"
                     )
 
-            else:
+                with col2:
+                    st.write(
+                        "**Field:**",
+                        resume_education["field"] or "Not found"
+                    )
 
-                st.warning(
-                    "No technical skills were identified."
+                st.divider()
+
+                st.markdown("### Experience Details")
+
+                st.metric(
+                    "Total Experience",
+                    f"{resume_experience['years']} years"
+                )
+
+                st.divider()
+
+                st.markdown("### Extracted Technical Skills")
+
+                if extracted_skills:
+
+                    for skill in extracted_skills:
+
+                        st.markdown(
+                            f'<span class="skill-tag">'
+                            f'{skill["name"]} · {skill["category"]}'
+                            f'</span>',
+                            unsafe_allow_html=True
+                        )
+
+                else:
+
+                    st.warning("No technical skills identified.")
+
+                st.divider()
+
+                st.markdown("### Preprocessed Resume Text")
+
+                st.text_area(
+                    "Cleaned Resume Content",
+                    processed_data["cleaned_text"],
+                    height=180
                 )
 
     except Exception as e:
@@ -172,14 +407,17 @@ if uploaded_resume is not None:
         st.error(f"Resume processing error: {e}")
 
 
-st.divider()
-
-
 # =====================================================
-# 5. JOB DESCRIPTION INPUT
+# 7. JOB INFORMATION
 # =====================================================
 
-st.header("2. Enter Job Description")
+st.markdown("""
+<div class="section-heading">
+    <span>02 · JOB INFORMATION</span>
+    <h2>What opportunity are you targeting?</h2>
+    <p>Enter the job requirements to evaluate your resume against them.</p>
+</div>
+""", unsafe_allow_html=True)
 
 job_title = st.text_input(
     "Job Title",
@@ -189,76 +427,120 @@ job_title = st.text_input(
 job_description_text = st.text_area(
     "Paste Job Description",
     placeholder="Enter the complete job description here...",
-    height=200
+    height=180
 )
 
 
 # =====================================================
-# 6. TECHNICAL SKILL REQUIREMENTS
+# 8. TECHNICAL SKILL REQUIREMENTS
 # =====================================================
 
-st.subheader("Required Technical Skills")
+st.markdown("""
+<div class="section-heading">
+    <span>03 · SKILL REQUIREMENTS</span>
+    <h2>Define your ideal candidate profile</h2>
+    <p>Select the skills and qualifications required for this position.</p>
+</div>
+""", unsafe_allow_html=True)
 
-required_skills_input = st.text_input(
-    "Mandatory Skills",
-    placeholder="Python, SQL, Django, Git"
-)
+col1, col2 = st.columns(2)
 
-st.subheader("Preferred Technical Skills")
+with col1:
 
-preferred_skills_input = st.text_input(
-    "Optional Skills",
-    placeholder="AWS, Docker, Kubernetes"
-)
+    st.markdown("### Mandatory Skills")
 
+    required_skills_input = st.text_input(
+        "Required Technical Skills",
+        placeholder="Python, SQL, Django, Git"
+    )
 
-# =====================================================
-# 7. QUALIFICATION REQUIREMENTS
-# =====================================================
+with col2:
 
-st.subheader("Job Qualifications")
+    st.markdown("### Preferred Skills")
 
-required_qualifications_input = st.text_input(
-    "Required Qualifications",
-    placeholder="Communication, Problem Solving"
-)
-
-preferred_qualifications_input = st.text_input(
-    "Preferred Qualifications",
-    placeholder="Teamwork, Leadership"
-)
+    preferred_skills_input = st.text_input(
+        "Optional Technical Skills",
+        placeholder="AWS, Docker, Kubernetes"
+    )
 
 
 # =====================================================
-# 8. EDUCATION REQUIREMENTS
+# 9. QUALIFICATION REQUIREMENTS
 # =====================================================
 
-st.subheader("Education Requirements")
+st.markdown("""
+<div class="section-heading">
+    <span>04 · QUALIFICATIONS</span>
+    <h2>Professional qualifications</h2>
+    <p>Add the qualities and abilities expected for this position.</p>
+</div>
+""", unsafe_allow_html=True)
 
-required_degree = st.selectbox(
-    "Required Degree",
-    [
-        "Not Specified",
-        "B.Tech",
-        "B.E.",
-        "B.Sc.",
-        "M.Tech",
-        "M.Sc.",
-        "MCA"
-    ]
-)
+col1, col2 = st.columns(2)
 
-required_education_field = st.text_input(
-    "Required Education Field",
-    placeholder="Computer Science, Information Technology"
-)
+with col1:
+
+    required_qualifications_input = st.text_input(
+        "Required Qualifications",
+        placeholder="Communication, Problem Solving"
+    )
+
+with col2:
+
+    preferred_qualifications_input = st.text_input(
+        "Preferred Qualifications",
+        placeholder="Teamwork, Leadership"
+    )
 
 
 # =====================================================
-# 9. EXPERIENCE REQUIREMENTS
+# 10. EDUCATION REQUIREMENTS
 # =====================================================
 
-st.subheader("Experience Requirements")
+st.markdown("""
+<div class="section-heading">
+    <span>05 · EDUCATION</span>
+    <h2>Academic requirements</h2>
+    <p>Specify the degree and education field required for the role.</p>
+</div>
+""", unsafe_allow_html=True)
+
+col1, col2 = st.columns(2)
+
+with col1:
+
+    required_degree = st.selectbox(
+        "Required Degree",
+        [
+            "Not Specified",
+            "B.Tech",
+            "B.E.",
+            "B.Sc.",
+            "M.Tech",
+            "M.Sc.",
+            "MCA"
+        ]
+    )
+
+with col2:
+
+    required_education_field = st.text_input(
+        "Required Education Field",
+        placeholder="Computer Science, Information Technology"
+    )
+
+
+# =====================================================
+# 11. EXPERIENCE REQUIREMENTS
+# =====================================================
+
+st.markdown("""
+<div class="section-heading">
+    <span>06 · EXPERIENCE</span>
+    <h2>Experience expectations</h2>
+    <p>Set the minimum professional experience required.</p>
+</div>
+""", unsafe_allow_html=True)
 
 min_experience_years = st.number_input(
     "Minimum Experience (Years)",
@@ -270,7 +552,7 @@ min_experience_years = st.number_input(
 
 
 # =====================================================
-# 10. PROCESS JOB DESCRIPTION INPUTS
+# 12. PROCESS JOB DESCRIPTION INPUTS
 # =====================================================
 
 required_skills = [
@@ -299,7 +581,7 @@ preferred_qualifications = [
 
 
 # =====================================================
-# 11. CREATE JOB DESCRIPTION DICTIONARY
+# 13. CREATE JOB DESCRIPTION DICTIONARY
 # =====================================================
 
 job_description = {
@@ -337,14 +619,18 @@ job_description = {
 
 
 # =====================================================
-# 12. RESUME ANALYSIS
+# 14. RESUME ANALYSIS
 # =====================================================
 
-st.divider()
+st.markdown("""
+<div class="section-heading">
+    <span>07 · ANALYSIS</span>
+    <h2>Ready to discover your match?</h2>
+    <p>Analyze your resume against the job requirements.</p>
+</div>
+""", unsafe_allow_html=True)
 
-st.header("3. Analyze Resume")
-
-if st.button("Analyze Resume", type="primary"):
+if st.button("✨ Analyze My Resume", type="primary", use_container_width=True):
 
     # Validate resume
     if uploaded_resume is None:
@@ -353,9 +639,7 @@ if st.button("Analyze Resume", type="primary"):
 
     elif not resume_text.strip():
 
-        st.error(
-            "Unable to extract readable text from your resume."
-        )
+        st.error("Unable to extract readable text from your resume.")
 
     elif not (
         job_title.strip()
@@ -369,206 +653,281 @@ if st.button("Analyze Resume", type="primary"):
         or min_experience_years > 0
     ):
 
-        st.warning(
-            "Please enter some job requirements before analysis."
-        )
+        st.warning("Please enter some job requirements before analysis.")
 
     else:
 
         try:
 
-            # Call the resume scoring function
+            # Call existing resume scoring function
             results = evaluate_resume(
-
                 resume_text,
-
                 extracted_skills,
-
                 resume_education,
-
                 resume_experience,
-
                 projects,
-
                 job_description
-
             )
 
-            st.success(
-                "Resume analysis completed successfully!"
-            )
+            st.success("Resume analysis completed successfully!")
 
-            st.divider()
+            explanation = results["explanation"]
 
-            # Generate downloadable PDF report
+            # =================================================
+            # 15. FINAL MATCH SCORE
+            # =================================================
+
+            st.markdown("""
+            <div class="section-heading">
+                <span>YOUR RESULTS</span>
+                <h2>Resume Match Overview</h2>
+                <p>See how well your resume matches this opportunity.</p>
+            </div>
+            """, unsafe_allow_html=True)
+
+            final_score = results["final_score"]
+
+            if final_score is not None:
+
+                score_col1, score_col2 = st.columns([1, 2])
+
+                with score_col1:
+
+                    st.metric(
+                        label="Overall Resume Match",
+                        value=f"{final_score}%"
+                    )
+
+                with score_col2:
+
+                    st.markdown("### Your Compatibility")
+
+                    st.progress(
+                        min(100, max(0, int(final_score)))
+                    )
+
+                    if final_score >= 80:
+
+                        st.success("Excellent match! Your resume aligns well with this role.")
+
+                    elif final_score >= 60:
+
+                        st.info("Good match! A few improvements may strengthen your application.")
+
+                    else:
+
+                        st.warning("There are skill or qualification gaps to work on.")
+
+            else:
+
+                st.warning("Unable to calculate the final score.")
+
+            # =================================================
+            # 16. INDIVIDUAL EVALUATION SCORES
+            # =================================================
+
+            st.markdown("### 📊 Individual Evaluation Scores")
+
+            individual_scores = results["individual_scores"]
+
+            score_items = list(individual_scores.items())
+
+            for i in range(0, len(score_items), 2):
+
+                cols = st.columns(2)
+
+                for j, col in enumerate(cols):
+
+                    index = i + j
+
+                    if index < len(score_items):
+
+                        category, score = score_items[index]
+
+                        with col:
+
+                            with st.container(border=True):
+
+                                st.markdown(
+                                    f"**{category.capitalize()}**"
+                                )
+
+                                if score is not None:
+
+                                    st.progress(
+                                        min(100, max(0, int(score)))
+                                    )
+
+                                    st.metric(
+                                        "Score",
+                                        f"{score}%"
+                                    )
+
+                                else:
+
+                                    st.info("Not evaluated")
+
+            # =================================================
+            # 17. SKILL GAP ANALYSIS
+            # =================================================
+
+            st.markdown("""
+            <div class="section-heading">
+                <span>SKILL GAP ANALYSIS</span>
+                <h2>Understand your skill match</h2>
+                <p>Identify your existing strengths and missing skills.</p>
+            </div>
+            """, unsafe_allow_html=True)
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+
+                with st.container(border=True):
+
+                    st.markdown("### ✅ Matched Required Skills")
+
+                    if explanation["matched_required_skills"]:
+
+                        for skill in explanation["matched_required_skills"]:
+
+                            st.markdown(
+                                f'<span class="skill-tag">{skill}</span>',
+                                unsafe_allow_html=True
+                            )
+
+                    else:
+
+                        st.write("No required skills matched.")
+
+            with col2:
+
+                with st.container(border=True):
+
+                    st.markdown("### ❌ Missing Required Skills")
+
+                    if explanation["missing_required_skills"]:
+
+                        for skill in explanation["missing_required_skills"]:
+
+                            st.markdown(
+                                f'<span class="missing-tag">{skill}</span>',
+                                unsafe_allow_html=True
+                            )
+
+                    else:
+
+                        st.success("All required skills are present!")
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+
+                with st.container(border=True):
+
+                    st.markdown("### ⭐ Matched Preferred Skills")
+
+                    if explanation["matched_preferred_skills"]:
+
+                        for skill in explanation["matched_preferred_skills"]:
+
+                            st.markdown(
+                                f'<span class="skill-tag">{skill}</span>',
+                                unsafe_allow_html=True
+                            )
+
+                    else:
+
+                        st.write("No preferred skills matched.")
+
+            with col2:
+
+                with st.container(border=True):
+
+                    st.markdown("### ⚠️ Missing Preferred Skills")
+
+                    if explanation["missing_preferred_skills"]:
+
+                        for skill in explanation["missing_preferred_skills"]:
+
+                            st.markdown(
+                                f'<span class="missing-tag">{skill}</span>',
+                                unsafe_allow_html=True
+                            )
+
+                    else:
+
+                        st.success("No missing preferred skills!")
+
+            # =================================================
+            # 18. STRENGTHS
+            # =================================================
+
+            st.markdown("""
+            <div class="section-heading">
+                <span>YOUR ADVANTAGES</span>
+                <h2>Strengths</h2>
+                <p>Discover what makes your resume stand out.</p>
+            </div>
+            """, unsafe_allow_html=True)
+
+            with st.container(border=True):
+
+                if explanation["strengths"]:
+
+                    for strength in explanation["strengths"]:
+
+                        st.write(f"✅ {strength}")
+
+                else:
+
+                    st.write("No specific strengths identified yet.")
+
+            # =================================================
+            # 19. AREAS FOR IMPROVEMENT
+            # =================================================
+
+            st.markdown("""
+            <div class="section-heading">
+                <span>GROWTH OPPORTUNITIES</span>
+                <h2>Areas for Improvement</h2>
+                <p>Use these suggestions to strengthen your resume.</p>
+            </div>
+            """, unsafe_allow_html=True)
+
+            with st.container(border=True):
+
+                if explanation["improvements"]:
+
+                    for improvement in explanation["improvements"]:
+
+                        st.write(f"💡 {improvement}")
+
+                else:
+
+                    st.success("No specific improvements identified.")
+
+            # =================================================
+            # 20. DOWNLOAD PDF REPORT
+            # =================================================
+
+            st.markdown("""
+            <div class="section-heading">
+                <span>YOUR REPORT</span>
+                <h2>Download your analysis</h2>
+                <p>Keep a copy of your resume evaluation for future reference.</p>
+            </div>
+            """, unsafe_allow_html=True)
+
             pdf_report = generate_pdf_report(results, job_title)
 
             st.download_button(
                 label="📥 Download Analysis Report (PDF)",
                 data=pdf_report,
                 file_name="resume_analysis_report.pdf",
-                mime="application/pdf"
+                mime="application/pdf",
+                use_container_width=True
             )
-
-
-            # =================================================
-            # 13. DISPLAY FINAL MATCH SCORE
-            # =================================================
-
-            st.subheader("Overall Resume Match Score")
-
-            final_score = results["final_score"]
-
-            if final_score is not None:
-
-                st.metric(
-                    label="Resume Match",
-                    value=f"{final_score}%"
-                )
-
-                st.progress(
-                    min(100, max(0, int(final_score)))
-                )
-
-            else:
-
-                st.warning(
-                    "Unable to calculate the final score."
-                )
-
-
-            st.divider()
-
-
-            # =================================================
-            # 14. DISPLAY INDIVIDUAL SCORES
-            # =================================================
-
-            st.subheader("Individual Evaluation Scores")
-
-            individual_scores = results["individual_scores"]
-
-            for category, score in individual_scores.items():
-
-                st.write(f"**{category.capitalize()}**")
-
-                if score is not None:
-
-                    st.progress(
-                        min(100, max(0, int(score)))
-                    )
-
-                    st.write(f"{score}%")
-
-                else:
-
-                    st.info("Not evaluated")
-
-
-            st.divider()
-
-
-            # =================================================
-            # 15. DISPLAY MATCHED AND MISSING SKILLS
-            # =================================================
-
-            explanation = results["explanation"]
-
-            st.subheader("Resume Analysis Details")
-
-
-            # Matched required skills
-            st.write("### Matched Required Skills")
-
-            if explanation["matched_required_skills"]:
-
-                for skill in explanation["matched_required_skills"]:
-
-                    st.write(f"✅ {skill}")
-
-            else:
-
-                st.write("No required skills matched.")
-
-
-            # Missing required skills
-            st.write("### Missing Required Skills")
-
-            if explanation["missing_required_skills"]:
-
-                for skill in explanation["missing_required_skills"]:
-
-                    st.write(f"❌ {skill}")
-
-            else:
-
-                st.write("All required skills are present!")
-
-
-            # Matched preferred skills
-            st.write("### Matched Preferred Skills")
-
-            if explanation["matched_preferred_skills"]:
-
-                for skill in explanation["matched_preferred_skills"]:
-
-                    st.write(f"✅ {skill}")
-
-            else:
-
-                st.write("No preferred skills matched.")
-
-
-            # Missing preferred skills
-            st.write("### Missing Preferred Skills")
-
-            if explanation["missing_preferred_skills"]:
-
-                for skill in explanation["missing_preferred_skills"]:
-
-                    st.write(f"⚠️ {skill}")
-
-            else:
-
-                st.write("No missing preferred skills.")
-
-
-            st.divider()
-
-
-            # =================================================
-            # 16. DISPLAY STRENGTHS
-            # =================================================
-
-            st.subheader("Strengths")
-
-            if explanation["strengths"]:
-
-                for strength in explanation["strengths"]:
-
-                    st.write(f"✅ {strength}")
-
-            else:
-
-                st.write("No specific strengths identified yet.")
-
-
-            # =================================================
-            # 17. DISPLAY AREAS FOR IMPROVEMENT
-            # =================================================
-
-            st.subheader("Areas for Improvement")
-
-            if explanation["improvements"]:
-
-                for improvement in explanation["improvements"]:
-
-                    st.write(f"💡 {improvement}")
-
-            else:
-
-                st.write("No specific improvements identified.")
-
 
         except Exception as e:
 
@@ -577,8 +936,19 @@ if st.button("Analyze Resume", type="primary"):
             )
 
 
+# =====================================================
+# 21. FOOTER
+# =====================================================
+
 st.divider()
 
-st.caption(
-    "Intelligent Resume Analyzer | Resume evaluation system"
-)
+st.markdown("""
+<div style="text-align:center; padding:15px;">
+    <p style="color:#658276; font-size:13px;">
+        ResumeIQ · Intelligent Resume Analyzer
+    </p>
+    <p style="color:#8A9B91; font-size:12px;">
+        AI-powered resume evaluation and career insights.
+    </p>
+</div>
+""", unsafe_allow_html=True)
